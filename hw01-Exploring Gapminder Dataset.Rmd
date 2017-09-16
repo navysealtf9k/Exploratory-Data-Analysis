@@ -11,7 +11,7 @@ output: github_document
 Gapminder is a **fact tank** that aims to educate the world about global development. It hopes to do so with the use of statistical information deemed reliable. They collaborate with the UN, universities and various public agents to undertake their research. For more details on them see <http://www.gapminder.org/about-gapminder/>.
 
 
-I initialize my exploration of the code with the following code:
+I initialize my exploration of the dataset with the following code:
 
 ```{r}
 
