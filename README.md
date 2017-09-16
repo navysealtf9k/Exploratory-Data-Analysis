@@ -12,7 +12,7 @@ If you would like to learn more about me, [please click here](https://www.linked
 - My sisters think I am wierd.
 
 ### Bonus Fact
-I --enjoy-- ocassionally *getting* roasted by my friends.
+I ~~enjoy~~ ocassionally *getting* roasted by my friends.
 
 ![](http://www.reactiongifs.com/r/O0oo0.gif)
 
