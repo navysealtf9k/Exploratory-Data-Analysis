@@ -6,13 +6,13 @@ I am Abdullah Farouk, a new master's student with the department of Statistics a
 
 If you would like to learn more about me, [please click here](https://www.linkedin.com/in/abdullah-farouk-a81a237a/)
 
-##Fun Facts
+## Fun Facts
 - I enjoy watching *cricket*
 - I Loved watching NCIS as a kid.
 - My sisters think I am wierd.
 
-###Bonus Fact
-I enjoy ocassionally *getting* roasted by my friends.
+### Bonus Fact
+I --enjoy-- ocassionally *getting* roasted by my friends.
 
 ![](http://www.reactiongifs.com/r/O0oo0.gif)
 
