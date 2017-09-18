@@ -14,20 +14,26 @@ Gapminder is a **fact tank** that aims to educate the world about global develop
 I initialize my exploration of the dataset with the following code:
 
 ```{r}
-
-install.packages('gapminder')
-install.packages('tidyverse')
 library(tidyverse)
 library(gapminder)
-
 ```
 
-The gapminder dataset includes information on three variables, for a host of countries from around the world. They are:
+To study the structure of the dataset and learn more about it's variables and their values, I do the following:
+
+```{r}
+str(gapminder)
+head(gapminder)
+tail(gapminder)
+length(gapminder$country)
+```
+
+
+The gapminder dataset has information on three interesting variables, for 1704 countries from around the world. They are:
 1. Life Expectancy
 2. Population
 3. GDP per capita
 
-These variables provide some interesting interactions for us to study.
+They provide some fascinating interactions for us to study.
 
 
 ### Brief Analysis of Life Expectancy Trends
