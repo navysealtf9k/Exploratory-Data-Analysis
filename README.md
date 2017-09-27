@@ -25,4 +25,9 @@ I used the sample template to experiment with most of the editing features on R 
 
 I was unsure of how to extend analysis on the gapminder dataset. Hence I chose to answer questions I thought would be interesting. It provided me with a nifty opportunity to embed code chunks and graphs. I had difficulty trying to generate the md file for it. Upon consultation with a friend I realized I had to knit it to generate and not manually type it in at the start of the document.
 
+##Home work 02##
+
+Please [click here]((http://stat545.com/block010_dplyr-end-single-table.html)) to see homework 2
+
+
 
