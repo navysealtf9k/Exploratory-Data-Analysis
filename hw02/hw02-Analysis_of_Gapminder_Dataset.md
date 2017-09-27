@@ -219,7 +219,7 @@ rank
     ## 3    Israel   3845611 73.64583 24.49465 14160.936
     ## 4 Sri Lanka  14545832 66.52608 23.87595  1854.731
 
-Since China has the largest average population and log gdp values. I normalize everyone else's values of population and log gdp using China's. The folllowing code is cited from stat 545 lecture on dplyr (<http://stat545.com/block010_dplyr-end-single-table.html>)
+Since China has the largest average population and log gdp values. I normalize everyone else's values of population and log gdp using China's. The folllowing code is cited from [stat 545 lecture on dplyr]((http://stat545.com/block010_dplyr-end-single-table.html))
 
 In order to do so I first extract data on China
 
@@ -230,7 +230,7 @@ china <- top_3_asian_econ %>%
 top_3_asian_econ <- mutate(top_3_asian_econ, tmp = rep(china$log_gdp, n_distinct(country)), log_gdp_rel = log_gdp / tmp, tmp = NULL, tmp_1 = rep(china$pop,n_distinct(country)), pop_rel = pop/tmp_1, tmp_1 = NULL)
 ```
 
-Now i plot the trends in the population and gdp growth of the three countries relative to China. The code was sourced from stackexchange. (<https://stackoverflow.com/questions/29357612/plot-labels-at-ends-of-lines>)
+Now i plot the trends in the population and gdp growth of the three countries relative to China. The code was sourced from [stackexhcange]((https://stackoverflow.com/questions/29357612/plot-labels-at-ends-of-lines)).
 
 ``` r
 rel_gdp_performance <- ggplot(top_3_asian_econ) + 
@@ -249,3 +249,9 @@ rel_gdp_performance
 ```
 
 ![](hw02-Analysis_of_Gapminder_Dataset_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-10-2.png)
+
+We spot two very interesting trends. Sri Lanka's population as a proportion of China's is way too small to make any reasonable inference about the effect of one on the other. Notice however that India's population as a proportion of China's has gone up with time. This is indicative of perhaps effective chinese policy on lowering their population growth rate, resulting in higher gdp per capita levels for itself.
+
+Looking over to the graph on relative GDP trends, we see that these countries GDPs relative to China's has been going down over time. This tells us that China has been able to grow its output, much faster over time than the rest of the countries have been able to.
+
+While nothing conclusive could be inferred about Sri Lanka's economic pitfalls, we have managed to identify some insights into the current economic situation with the Asia.
