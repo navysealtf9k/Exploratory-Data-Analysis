@@ -9,22 +9,12 @@ output: github_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+I looked into the interactions between population, GDP and life expectancies to try and understand why Sri Lanka is not performing as well, economically, as its peers.
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
-```
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+Progress Report
+- Used to R to create a mark down document.
+- Changed name of previous folder and created new subfolders for hw01 and hwo02.
+- Really enjoyed playing with dplyr and ggplot 2.
+- Encountered difficulty when trying to perform a relative analysis. Managed to overcome it by referencing[class notes]((http://stat545.com/block010_dplyr-end-single-table.html))
+- Found it difficult to plot multiple time series data on one plot. Managed to overcome it by referening [stackexhcange]((https://stackoverflow.com/questions/29357612/plot-labels-at-ends-of-lines)).
+- Managed to find some interesting trends, which I have highlighted in my [analysis]((https://github.com/navysealtf9k/STAT545-hw-Farouk-Abdullah/blob/master/hw02/hw02-Analysis_of_Gapminder_Dataset.md))
