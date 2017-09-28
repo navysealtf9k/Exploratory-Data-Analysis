@@ -27,7 +27,7 @@ I was unsure of how to extend analysis on the gapminder dataset. Hence I chose t
 
 ## Home work 02
 
-Please [click here](http://stat545.com/block010_dplyr-end-single-table.html) to see homework 2
+Please [click here](https://github.com/navysealtf9k/STAT545-hw-Farouk-Abdullah/blob/master/hw02/hw02-Analysis_of_Gapminder_Dataset.md) to see homework 2
 
 
 
