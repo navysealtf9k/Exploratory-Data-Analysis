@@ -1,0 +1,188 @@
+---
+title: "Hw03"
+author: "Abdullah Farouk"
+date: '2017-09-29'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+library(gapminder)
+library(stargazer)
+library(pander)
+library(grid)
+```
+
+In this exploration of the gapminder dataset I try to carry out the tasks asked of us in class. Of the many listed, here are the 4 I chose to do
+
+##Get the maximum and minimum of GDP per capita for all continents.##
+```{r results = 'asis', echo=FALSE}
+#Calculating the max and min values of GDP
+cpy <- gapminder
+max_min <- cpy %>% 
+  group_by(continent) %>% 
+  summarise(max_gdp = max(gdpPercap), min_gdp = min(gdpPercap), spread = max_gdp - min_gdp)
+
+#Table of resuls
+pandoc.table(max_min)  #Also experimented with knitr::kable(max_min)
+
+#Graph output
+max_min_grph <- ggplot(max_min, aes(x = continent))
+max_min_grph + 
+  geom_bar(stat = 'identity', aes(y = spread, colour = continent), fill = 'steelblue') + 
+  theme_minimal()
+  
+  
+```
+
+We notice Asia has the largest spread in gdp per capita relative to all other continents. This tells us that their countries have more of an unequal distibution of gains from trade relative to countries in all the other continents. 
+
+## Look at the spread of GDP per capita within the continents.##
+Lets investigate this further. To do so lets draw up spaghetti plots for the different continents. 
+```{r}
+#Visualizing spread of GDP across continents
+spread_gdp_continent <- cpy %>% 
+  ggplot(aes(x=year, y = gdpPercap, group = country)) + 
+  facet_wrap(~continent) + 
+  geom_line(aes(colour = continent), alpha = 0.3, size = 1) + 
+  theme(axis.text.x=element_text(angle=45,hjust=1)) + scale_y_log10()
+spread_gdp_continent
+
+#tabulating spread 
+spread_gdp_continent_table <- cpy %>% 
+  group_by(year, continent) %>% 
+  summarize_each(funs(min, max), gdpPercap) %>%
+  mutate(spread = max - min) %>% 
+  split(list(.$continent))
+  #select(year, continent, country, gdpPercap)
+knitr::kable(spread_gdp_continent_table, style = 'ordered', loose = TRUE) #Tried to use pandoc function to tabulate list.
+
+# #I use the following code to try and plot the spread but it does not seem to execute.
+# spread_gdp_continent_2 <- as.data.frame(spread_gdp_continent_table) %>% 
+#   ggplot(aes(x= year, y = spread)) + facet_wrap(~continent) + geom_line(aes(colour = continent), alpha = 0.3, size = 1) + scale_y_log10()
+# spread_gdp_continent_2
+
+```
+
+Our plot seems to veirfy our prior findings. Their seems to be a lot of variation in gdp per capita, through time, amongst Asian countries. In order to get a better understanding of the roles of induvidual counrties in the swings we observe, we can examine the tables above. 
+
+They show some very insightful trends. In Africa for instance we see the spread decreasing with time, after attaining it's maximum value. The spreads seem to increase over time in America, Europe and Oceania whilst in Asia it fluctuates up and down with a general upwards trend.
+
+### Citations ###
+Used this link to learn how to split my dataset https://stackoverflow.com/questions/45664618/splitting-a-dataset-into-multiple-tables-using-tidyverse-methods
+
+## Compute a trimmed mean of life expectancy for different years. Or a weighted mean, weighting by population. Just try something other than the plain vanilla mean.##
+
+Having analyzed variations in gdp per capita, we now turn our attention to it's relationship with life expectancies. In particular I am seeking an answer to the following question; Does world life expectancy go up when world gdp goes up?
+
+In other words do countries make use of their new found wealth to ensure their populations live longer? To answer this I calculate life expectancy as a proportion of the log of gdp per capita. I take a log of it to reduce the effects of the magnitude of gdp on my calculations. 
+
+```{r}
+#Compute a weighted mean within the continents
+lifeexp_mean <- cpy %>% 
+  group_by(year) %>% 
+  summarise_each(funs(mean), lifeExp, gdpPercap) %>%
+  mutate(wieghted_lifeExp = lifeExp/log(gdpPercap))
+pandoc.table(lifeexp_mean, style = 'multiline')
+  
+#Plot graph to visualize how trimmed mean evolves over time.  
+ggplot(lifeexp_mean, aes(x = year, y = wieghted_lifeExp)) + 
+  geom_line(stat = 'identity', colour = 'red') + 
+  theme(axis.text.x=element_text(angle=45,hjust=1)) + 
+  theme_dark() + 
+  labs(y = 'Weighted Life Expectancy') +
+  ggtitle('Changes in Life Expectancy over Time')
+
+
+
+```
+
+Our plot and table shows us that our weighted measure of life expectancy is going up over time. We have seen that gdp per capita, across continents have gone up over time. Hence one possible explanation is that increases in life expectancy are larger than increases in the log of worldwide gdp per cap over time. As log is a concave function, any increase in gdp per capita would lead to smaller increases in the log of its value. This allows us to smooth out large increases in gdp per capita over time and properly identify the relationship between life expectancy and gdp per capita.
+
+## How is life expectancy changing over time on different continents?##
+
+Is this upward trend in life expectancy true of all continents or just some? to investigate we produce the following plots
+
+```{r}
+#Plot of changes in life expectancy over time.
+lifeexp_continent <- cpy %>% 
+  ggplot(aes(x=year, y = lifeExp, group = continent)) + 
+  facet_wrap(~ continent, scales = 'free_x', nrow = 3, ncol = 3) + 
+  geom_point(aes(colour = continent), alpha = 0.2) + 
+  scale_x_continuous( expand= c(0,0), breaks=seq(1950,2007,10)) + 
+  theme(axis.text.x=element_text(angle=45,hjust=1)) + # The x continuos arguement allows me to adjust increments along the x axis and the axis.text arguement allows me to adjust it's display angle. 
+  labs(y = 'Life Expectancy') +
+  theme_light()
+lifeexp_continent
+
+#Tabulating changes in life expectancy over time.
+lifeexp_continent_table <- cpy %>% 
+  group_by(year, continent) %>% 
+  summarise_each(funs(mean), lifeExp, gdpPercap) %>%
+  mutate(wieghted_lifeExp = lifeExp/log(gdpPercap)) %>% 
+  split(list(.$continent))
+knitr::kable(lifeexp_continent_table) 
+```
+
+Our results are quite interesting. Whilst every continent exhibits an upward trend, its the lower bound of life expectancy in each that catches my eye. This is because most continents have countries whose citizens live till 80 and also include countries whose people only live up to the age of 40. 
+
+This is not true, however of countries in continents like Oceania, Europe and the Americas. All of them seemed to have pulled up the life expectancies of all their member countries to within the range of 60 - 80. This is a remarkable feet given the time span over which it was achieved.
+
+### Citations ###
+
+Code cited from https://github.com/Kozp/STAT545-hw-Kozik-Pavel/blob/Side-Branch/hw02/hw2.md
+
+## Report the absolute and/or relative abundance of countries with low life expectancy over time by continent: Compute some measure of worldwide life expectancy – you decide – a mean or median or some other quantile or perhaps your current age. Then determine how many countries on each continent have a life expectancy less than this benchmark, for each year. ##
+
+I devised my benchmark as follows. I looked at the median life expectancy across continents and then took an average of it. This is because Africa's median value is much lower than the rest of the continents and I wanted the effect of this *outlier* captured.
+
+I then classify countries in the dataset according to whether they are above or below this benchmark. They are grouped by continent and *a count is kept* of how many of them remain above/below this benchmark over time. This gives me a sense of yearly improvements in living standards across continents.
+
+```{r}
+#Benchmark life Expectancy
+benchmark <- cpy %>% 
+  group_by(continent) %>%  
+  summarise(mdn_le = median(lifeExp)) 
+benchmark
+
+world_benchmark <- benchmark %>% 
+  summarise(mean(mdn_le)) # Varying between mean and median to see effect of outliers
+world_benchmark
+
+wrld_avg <- cpy %>% 
+  group_by(country, year) %>%   #Grouping made my if statement work for some reason
+  mutate(lifeexp_performance = ifelse(lifeExp > world_benchmark, 'above', 'below'))
+  
+# Count and plot how many countries are below and above in each continent over time
+w <- count(group_by(wrld_avg, lifeexp_performance, continent, year), sort = TRUE) 
+knitr::kable(w)  #stargazer(w, type = 'text', summary = FALSE)
+
+#p <- (w$lifeexp_perf) 
+abv_vs_blw <- ggplot(w, aes(x = year, y = n)) + ylab('Number of Countries')
+
+abv_vs_blw + geom_bar(stat = "identity", aes(fill = lifeexp_performance)) + 
+ facet_grid(~continent) + 
+ scale_x_continuous( expand= c(0,0), breaks=seq(1950,2007,10)) + 
+ theme(axis.text.x=element_text(angle=45,hjust=1)) + 
+ labs(fill = "Benchmark")+  
+ coord_flip() +
+ #geom_text(aes(label= n), vjust=1, color="white", size=2.0) + 
+ theme(panel.spacing = unit(0.2, "lines")) +
+ scale_fill_brewer(palette="Dark2")
+
+
+```
+
+We notice some remabrkable continent-wide trends. The first observation is that the number of African countries above the benchmark grew over time. The fact that, over time, more African countries (with an average lifespan of 41 years) are able to ensure their population lives on over 60 years is very impressive. Furthermore we notice a similar decrease in the number of countries below the benchmark in the Americas as well.
+
+More Asian countries have moved above the benchmark over time whilst Europe has cemented itself as the *most consistent continent* in this regard. This is bcause, starting around the 90's, it has been able to ensure all of its countries people remain above the benchmark.
+
+### Citations ###
+Bar plot cited from http://www.sthda.com/english/wiki/ggplot2-barplots-quick-start-guide-r-software-and-data-visualization and from https://www.r-bloggers.com/make-a-bar-plot-with-ggplot/
+Code cited from lecture 6 in class. https://stat545.com/cm007-notes_and_exercises.html 
+
+The results we have discussed thus far, provide an overview of the wide variations, along the variables in the gapminder dataset, amongst the different continents across the world. I look forward to doing some more in the next assignment.
