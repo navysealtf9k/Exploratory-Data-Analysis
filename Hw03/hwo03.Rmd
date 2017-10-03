@@ -2,7 +2,7 @@
 title: "Hw03"
 author: "Abdullah Farouk"
 date: '2017-09-29'
-output: html_document
+output: github_document
 ---
 
 ```{r setup, include=FALSE}
@@ -59,7 +59,7 @@ spread_gdp_continent_table <- cpy %>%
   mutate(spread = max - min) %>% 
   split(list(.$continent))
   #select(year, continent, country, gdpPercap)
-knitr::kable(spread_gdp_continent_table, style = 'ordered', loose = TRUE) #Tried to use pandoc function to tabulate list.
+knitr::kable(spread_gdp_continent_table, align = 'c') #Tried to use pandoc function to tabulate list.
 
 # #I use the following code to try and plot the spread but it does not seem to execute.
 # spread_gdp_continent_2 <- as.data.frame(spread_gdp_continent_table) %>% 
