@@ -29,5 +29,6 @@ I was unsure of how to extend analysis on the gapminder dataset. Hence I chose t
 
 Please [click here](https://github.com/navysealtf9k/STAT545-hw-Farouk-Abdullah/blob/master/hw02/hw02-Analysis_of_Gapminder_Dataset.md) to see homework 2
 
+## Home work 03
 
-
+Please [click here](https://github.com/navysealtf9k/STAT545-hw-Farouk-Abdullah/blob/master/Hw03/hwo03.md) to see homework 3
