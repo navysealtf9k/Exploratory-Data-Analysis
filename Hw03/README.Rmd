@@ -1,7 +1,9 @@
+---
 title: "README"
 author: "Abdullah Farouk"
 date: '2017-10-03'
 output: github_document
+---
 
 I highlight the various tasks I carried out, along with my thoughts on what was easy and difficult for me to achieve. Please refer to [hw03]((https://github.com/navysealtf9k/STAT545-hw-Farouk-Abdullah/blob/master/Hw03/hwo03.md)) if you want to see what my analysis looks like.
 
@@ -35,6 +37,7 @@ Progress Report
 
 ## I want to do more ##
 - Experimented with pandoc tables and tried to use (unsuccessfully as I didn't have any regression output) stargazer to generate tables.
+- Also experimented with the side by side layout in the first task.
 
 ## NOTE ##
 All citations for my code are in my link to [hw03]((https://github.com/navysealtf9k/STAT545-hw-Farouk-Abdullah/blob/master/Hw03/hwo03.md)) 

@@ -45,6 +45,7 @@ I want to do more
 -----------------
 
 -   Experimented with pandoc tables and tried to use (unsuccessfully as I didn't have any regression output) stargazer to generate tables.
+-   Also experimented with the side by side layout in the first task.
 
 NOTE
 ----
