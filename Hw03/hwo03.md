@@ -36,7 +36,7 @@ library(pander)
 library(grid)
 ```
 
-In this exploration of the gapminder dataset I try to carry out the tasks asked of us in class. Of the many listed, here are the 4 I chose to do
+In this exploration of the gapminder dataset I try to carry out the tasks asked of us in class. Of the many listed, here are the five I chose to do:
 
 Get the maximum and minimum of GDP per capita for all continents.
 -----------------------------------------------------------------
@@ -226,7 +226,7 @@ They show some very insightful trends. In Africa for instance we see the spread 
 
 ### Citations
 
-Used this link to learn how to split my dataset <https://stackoverflow.com/questions/45664618/splitting-a-dataset-into-multiple-tables-using-tidyverse-methods>
+Used this link to learn how to split my dataset [here](https://stackoverflow.com/questions/45664618/splitting-a-dataset-into-multiple-tables-using-tidyverse-methods)
 
 Compute a trimmed mean of life expectancy for different years. Or a weighted mean, weighting by population. Just try something other than the plain vanilla mean.
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -414,7 +414,7 @@ This is not true, however of countries in continents like Oceania, Europe and th
 
 ### Citations
 
-Code cited from <https://github.com/Kozp/STAT545-hw-Kozik-Pavel/blob/Side-Branch/hw02/hw2.md>
+Code cited from [here](https://github.com/Kozp/STAT545-hw-Kozik-Pavel/blob/Side-Branch/hw02/hw2.md)
 
 Report the absolute and/or relative abundance of countries with low life expectancy over time by continent: Compute some measure of worldwide life expectancy – you decide – a mean or median or some other quantile or perhaps your current age. Then determine how many countries on each continent have a life expectancy less than this benchmark, for each year.
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -586,6 +586,6 @@ More Asian countries have moved above the benchmark over time whilst Europe has 
 
 ### Citations
 
-Bar plot cited from <http://www.sthda.com/english/wiki/ggplot2-barplots-quick-start-guide-r-software-and-data-visualization> and from <https://www.r-bloggers.com/make-a-bar-plot-with-ggplot/> Code cited from lecture 6 in class. <https://stat545.com/cm007-notes_and_exercises.html>
+Bar plot cited from [here](http://www.sthda.com/english/wiki/ggplot2-barplots-quick-start-guide-r-software-and-data-visualization) and from [here](https://www.r-bloggers.com/make-a-bar-plot-with-ggplot/). Code cited from lecture 6 in class. [here](https://stat545.com/cm007-notes_and_exercises.html)
 
 The results we have discussed thus far, provide an overview of the wide variations, along the variables in the gapminder dataset, amongst the different continents across the world. I look forward to doing some more in the next assignment.

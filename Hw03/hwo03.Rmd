@@ -17,9 +17,10 @@ library(pander)
 library(grid)
 ```
 
-In this exploration of the gapminder dataset I try to carry out the tasks asked of us in class. Of the many listed, here are the 4 I chose to do
+In this exploration of the gapminder dataset I try to carry out the tasks asked of us in class. Of the many listed, here are the five I chose to do:
 
 ##Get the maximum and minimum of GDP per capita for all continents.##
+
 ```{r results = 'asis', echo=FALSE}
 #Calculating the max and min values of GDP
 cpy <- gapminder
@@ -42,7 +43,9 @@ max_min_grph +
 We notice Asia has the largest spread in gdp per capita relative to all other continents. This tells us that their countries have more of an unequal distibution of gains from trade relative to countries in all the other continents. 
 
 ## Look at the spread of GDP per capita within the continents.##
+
 Lets investigate this further. To do so lets draw up spaghetti plots for the different continents. 
+
 ```{r}
 #Visualizing spread of GDP across continents
 spread_gdp_continent <- cpy %>% 
@@ -73,7 +76,8 @@ Our plot seems to veirfy our prior findings. Their seems to be a lot of variatio
 They show some very insightful trends. In Africa for instance we see the spread decreasing with time, after attaining it's maximum value. The spreads seem to increase over time in America, Europe and Oceania whilst in Asia it fluctuates up and down with a general upwards trend.
 
 ### Citations ###
-Used this link to learn how to split my dataset https://stackoverflow.com/questions/45664618/splitting-a-dataset-into-multiple-tables-using-tidyverse-methods
+
+Used this link to learn how to split my dataset  [here](https://stackoverflow.com/questions/45664618/splitting-a-dataset-into-multiple-tables-using-tidyverse-methods) 
 
 ## Compute a trimmed mean of life expectancy for different years. Or a weighted mean, weighting by population. Just try something other than the plain vanilla mean.##
 
@@ -134,7 +138,7 @@ This is not true, however of countries in continents like Oceania, Europe and th
 
 ### Citations ###
 
-Code cited from https://github.com/Kozp/STAT545-hw-Kozik-Pavel/blob/Side-Branch/hw02/hw2.md
+Code cited from [here](https://github.com/Kozp/STAT545-hw-Kozik-Pavel/blob/Side-Branch/hw02/hw2.md) 
 
 ## Report the absolute and/or relative abundance of countries with low life expectancy over time by continent: Compute some measure of worldwide life expectancy – you decide – a mean or median or some other quantile or perhaps your current age. Then determine how many countries on each continent have a life expectancy less than this benchmark, for each year. ##
 
@@ -182,7 +186,8 @@ We notice some remabrkable continent-wide trends. The first observation is that 
 More Asian countries have moved above the benchmark over time whilst Europe has cemented itself as the *most consistent continent* in this regard. This is bcause, starting around the 90's, it has been able to ensure all of its countries people remain above the benchmark.
 
 ### Citations ###
-Bar plot cited from http://www.sthda.com/english/wiki/ggplot2-barplots-quick-start-guide-r-software-and-data-visualization and from https://www.r-bloggers.com/make-a-bar-plot-with-ggplot/
-Code cited from lecture 6 in class. https://stat545.com/cm007-notes_and_exercises.html 
+
+Bar plot cited from [here](http://www.sthda.com/english/wiki/ggplot2-barplots-quick-start-guide-r-software-and-data-visualization)  and from [here](https://www.r-bloggers.com/make-a-bar-plot-with-ggplot/). 
+Code cited from lecture 6 in class. [here](https://stat545.com/cm007-notes_and_exercises.html)  
 
 The results we have discussed thus far, provide an overview of the wide variations, along the variables in the gapminder dataset, amongst the different continents across the world. I look forward to doing some more in the next assignment.
