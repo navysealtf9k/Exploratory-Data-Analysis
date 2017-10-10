@@ -1,0 +1,153 @@
+---
+title: "Hw04"
+author: "Abdullah Farouk"
+date: '2017-10-08'
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+In this homework assignment I try out the following tasks outlined for us in the hw04 webpage. I primarily use the Gapminder dataset along with a new dataset I found called country codes. It contains the ISO codes and the continental region for the different countries in the gapminder dataset. I run into interesting problems when I try to join the two dataframes and this leads to me exploring alternative join functions to overcome them.
+
+
+
+```{r}
+suppressPackageStartupMessages(library(tidyverse))
+suppressPackageStartupMessages(library(gapminder))
+
+
+```
+
+
+## Make a tibble with one row per year and columns for life expectancy for two or more countries. Use knitr::kable() to make this table look pretty in your rendered homework.Take advantage of this new data shape to scatterplot life expectancy for one country against that of another.
+
+For this activity I chose to analyze variations in life expectancy trends between Sri Lanka and India. I chose India as my comparative benchmark simply because it's Sri Lanka's closest neighbor. The question I want an answer to is "Does Sri Lanka have a better healthcare system than India?" If this is the case, since Sri Lanka has a smaller population it may be able to allocate a greater proportion of it's gdp towards the provision of good healthcare to it's people. This should translate to higher life expectancies of it's people. Is there evidence in the data to support such a claim?
+
+In order to answer my question, I first create a filtered table of the gapminder dataset. I had difficulty deciding between which of the data reshaping functions (spread or gather) to use as I could not understand what each function was supposed to do. I managed to learn how to use gather and spread functions [through this website](http://garrettgman.github.io/tidying/)
+
+Since the question asked for a column for the life expectancy of each country, I used the spread function to 'spread' the values of life expectancy into the different country columns that my function call created.
+
+Once I produced my table , I proceeded to try and graph my results. Lets analyze what I got.
+
+```{r}
+#Was trying to use gather incorrectly. Now trying spread!
+gapminder_wide_form <- gapminder %>% 
+  filter(country == 'Sri Lanka' | country == 'India') %>%  # , 'Pakistan', 'Bangladesh'
+  select(year, country ,lifeExp, pop) %>% 
+  spread(key = country, value = lifeExp, fill = 0) 
+gapminder_wide_form
+
+knitr::kable(gapminder_wide_form)
+
+#Plot of life expectancy of Sri Lanka against India
+gapminder_wide_form %>% 
+  ggplot(aes(x = `Sri Lanka`, y = India)) +
+  geom_point(aes(size = pop/10^9, color = year) ,show.legend = TRUE) +  # Divide pop by billion to get more readable output.
+  theme_bw() +
+  labs(title = 'Sri Lanka vs India' , x = 'Life Expectancy of Sri Lanka', y = 'Life Expectancy of India', colour = "Year", size = "Population") +
+  theme(legend.justification = 'center', legend.position = "right", legend.title.align = 0.5, plot.title = element_text(hjust = 0.5)) +
+  theme(legend.key = element_rect(fill = "white", colour = "black")) +
+  theme(legend.text = element_text(size = 8, colour = "black", face = 'bold')) +
+  scale_size_continuous(breaks=c(0.2, 0.5, 0.8),
+                             labels=c("Small", "Big", "Huge"))
+ 
+  
+#Finally!
+
+```
+
+The bubbles get lighter as we move forward in time and its size varies based on how big the population was at that point in time. I used a nifty trick seen in [class 08 notes](https://stat545.com/cm008-notes_and_exercises.html) to convert my population legend into a more readable form. 
+
+We notice that both countries have experienced an increase in life expectancy over time. However there are some stark differences that this graph makes clear. For starters we see that Sri Lanka started off with a much higher value and has maintained a much higher life expectancy than India. 
+
+Does this mean Sri Lanka has a better healthcare system? Not neccessairly. It's easy to see that India has managed to double it's life expectancy over the span of 50 years, whilst its population has grown almost three fold during that span of time. This is quite an incredible feet! Hence like most things in life, the answer to my inital question is not as straightforward as we would like it to be.
+
+
+
+## Create a second data frame, complementary to Gapminder. Join this with (part of) Gapminder using a dplyr join function and make some observations about the process and result. Explore the different types of joins. Examples of a second data frame you could build: One row per country, a country variable and one or more variables with extra info, such as language spoken, NATO membership, national animal, or capitol city. If you really want to be helpful, you could attempt to make a pull request to resolve this issue, where I would like to bring ISO country codes into the gapminder package. One row per continent, a continent variable and one or more variables with extra info, such as northern versus southern hemisphere.
+
+In this activity I try to bring in the ISO codes and the continental regions for each country in our gapminder dataset. I use the [countrycode dataset in r](https://cran.r-project.org/web/packages/countrycode/countrycode.pdf) and create a dataframe, called country_codes, with the variables I would like to keep from it.
+
+```{r}
+
+# Please use install.packages("countrycode")
+library(countrycode)
+knitr::kable(head(countrycode_data))
+
+#Create country dataframe with select variables of interest
+country_codes <- countrycode_data %>% 
+  select(continent, country.name.en , iso2c, iso3c, region) %>% 
+  rename(country = country.name.en) # Makes it easier to use inner_join function
+knitr::kable(head(country_codes))
+
+```
+
+To begin my join operations, I look for which countries in the gapminder dataset I have ISO codes for in my countrycodes dataset. To do so I perform the following:
+
+```{r}
+#Are all the countries in the gapminder dataset found in the country code dataset?
+verify_countries <- semi_join(x = gapminder, y = country_codes)
+knitr::kable(head(verify_countries))
+n_distinct(verify_countries$country) == n_distinct(gapminder$country) # Answer is FALSE
+
+```
+
+
+I notice that I don't have ISO codes for all the countries. Hence I look for whcich countries I dont have codes for. 
+
+```{r}
+#Which countries do I not have ISO codes for?
+missing_countries <- anti_join(x = gapminder, y = country_codes)
+knitr::kable(head(missing_countries))
+n_distinct(missing_countries$country) 
+```
+
+This is why my inner_join will not give me the ISO codes for all the countries in the gapminder dataset. It turns out the countries I am missing codes for have different naming conventions in both the data sets.  
+
+Note: I renamed my country column in the country_codes data frame to make it easier for the inner_join function to operate on my dataframes. I used this website to [learn how to rename columns in a datset](https://blog.exploratory.io/selecting-columns-809bdd1ef615)
+
+```{r}
+#Here I add the ISO codes to each country in the gapminder dataset.
+gapminder_update <- inner_join(gapminder, country_codes)
+gapminder_iso <- gapminder_update %>% 
+  select(country, continent, pop, iso3c, region)
+knitr::kable(head(gapminder_iso))
+n_distinct(gapminder_iso$country) == n_distinct(gapminder$country) #Answer is FALSE
+```
+
+ A quick and easy fix is to use the full_join command. This allows me to associate an ISO code with every country in the Gapminder dataset. This is a quick fix because I avoide having to change the names of the 21 countries in the gapminder dataset that have a different naming convention in my country codes database. 
+ 
+However doing so would be a more appropriate task, which I do not know how to perform unfortunately.
+ 
+```{r}
+#Include ISO codes of countries left out due to naming convention differences.
+gapminder_iso_full <- full_join(gapminder, country_codes)
+n_distinct(gapminder_iso_full$country)
+
+knitr::kable(head(gapminder_iso_full))
+  
+```
+
+
+## Explore the base function merge(), which also does joins. Compare and contrast with dplyr joins.
+
+
+```{r}
+# Call on the merge function
+gapminder_country_code_merge <- merge(x = gapminder, y = country_codes)
+knitr::kable(head(gapminder_country_code_merge))
+n_distinct(gapminder_country_code_merge$country) # How many countries match
+
+# Now i call on the match function
+gapminder_country_code_match <- match(x = gapminder$country, table = country_codes$country, nomatch = 0) # the no match arguement tells R to replace NA's with 0's if there is no match.
+n_distinct(gapminder_country_code_match) # How many countries match
+which(gapminder_country_code_match == 0) # Are there any that don't?
+```
+
+The merge function is identical in it's functionality to the inner_join command in dplyr, merging rows by countries with the same naming convention in both dataframes. The match function on the other hand differs. It does not give the rows or a data frame with matching entries but rather the position of entries in the fisrt vector, in the second vector.
+
+To verify if my merge function operates like an inner join I use the n_distinct function. It matches the results I get when I perform my inner join call as well. I do the same on my match call and I notice I get 2 more matches relative to my merge and inner join function call. I am unsure how to interpret this result. On a final note I also check to see if there are entries that dont match, which there seem to be.
+
+This assignment helped me learn how to convert my data into different shapes and how these shapes allow me to accomplish tasks of varying complexity. I really enjoyed this and merging datasets so that I have more variables to play with to enrich my analysis and exploration.
