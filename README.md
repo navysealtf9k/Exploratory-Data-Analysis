@@ -32,3 +32,8 @@ Please [click here](https://github.com/navysealtf9k/STAT545-hw-Farouk-Abdullah/b
 ## Home work 03
 
 Please [click here](https://github.com/navysealtf9k/STAT545-hw-Farouk-Abdullah/blob/master/Hw03/hwo03.md) to see homework 3
+
+
+## Home work 04 
+
+Please [click here](https://github.com/navysealtf9k/STAT545-hw-Farouk-Abdullah/blob/master/Hw04/hw04.md) to see homework 4 
