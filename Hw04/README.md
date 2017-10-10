@@ -3,7 +3,7 @@ README
 Abdullah Farouk
 2017-10-10
 
-I highlight the various tasks I carried out, along with my thoughts on what was easy and difficult for me to achieve. Please refer [here](https://github.com/navysealtf9k/STAT545-hw-Farouk-Abdullah/blob/master/Hw03/hwo03.md) if you want to see what my analysis looks like.
+I highlight the various tasks I carried out, along with my thoughts on what was easy and difficult for me to achieve. Please refer [here](https://github.com/navysealtf9k/STAT545-hw-Farouk-Abdullah/blob/master/Hw04/hw04.md) if you want to see what my analysis looks like.
 
 Progress Report
 ===============
@@ -39,4 +39,4 @@ Explore the base function merge(), which also does joins. Compare and contrast w
 NOTE
 ----
 
-All citations for my code are in my link [here](https://github.com/navysealtf9k/STAT545-hw-Farouk-Abdullah/blob/master/Hw03/hwo03.md)
+All citations for my code are in my link [here](https://github.com/navysealtf9k/STAT545-hw-Farouk-Abdullah/blob/master/Hw04/hw04.md)
