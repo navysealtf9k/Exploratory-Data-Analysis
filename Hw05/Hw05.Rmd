@@ -11,7 +11,6 @@ knitr::opts_chunk$set(echo = TRUE)
 
 In this assignment, I attempt the tasks asked of us in [hw05](http://stat545.com/hw05_factor-figure-boss-repo-hygiene.html).
 
-
 ```{r}
 suppressPackageStartupMessages(library(tidyverse))
 suppressPackageStartupMessages(library(forcats))
@@ -22,7 +21,9 @@ suppressPackageStartupMessages(library(knitr))
 
 ```
 
+
 ## Drop Oceania. Filter the Gapminder data to remove observations associated with the continent of Oceania. Additionally, remove unused factor levels. Provide concrete information on the data before and after removing these rows and Oceania; address the number of rows and the levels of the affected factors.
+
 
 ```{r}
 
@@ -40,12 +41,14 @@ nrow(gap_less_oceania)
 n_distinct(levels(gapminder$continent))
 nrow(gapminder)
 ```
+
 Here we notice that we now have 4 continents and 1680 rows vs 5 continents and 1704 rows in the original dataset. Thus we have verification of the removal of Oceania from our dataset. We observe that the information related to countries in all the other continents are the same across datasets.
 
 Over here and in the rest of the assignment I could not seem to drop levels using the fct_drop function for some reason. 
 
 
 ## Reorder the levels of country or continent. Use the forcats package to change the order of the factor levels, based on a principled summary of one of the quantitative variables. Consider experimenting with a summary statistic beyond the most basic choice of the median.
+
 
 ```{r}
 #Basic reordering
@@ -77,8 +80,7 @@ I used the following link to learn more about [factors](http://r4ds.had.co.nz/fa
 
 
 ##Explore the effects of arrange(). Does merely arranging the data have any effect on, say, a figure?
-##Explore the effects of reordering a factor and factor reordering coupled with arrange(). ##Especially, what effect does this have on a figure?
-##These explorations should involve the data, the factor levels, and some figures.
+
 
 ```{r}
 #Exploring the effects or arrange
@@ -126,6 +128,7 @@ The three diagrams tell us an interesting story. The first shows that reordering
 
 ## Use ggsave() to explicitly save a plot to file.
 
+
 ```{r}
 ?ggsave #Find out what arguements it takes
 ggsave(filename = 'without_arrange.png', plot = fig_without_fctr, device = 'png', width = 6, height = 6)
@@ -142,6 +145,7 @@ I chose to save my plot as a png file. In addition in this part of the assignmen
 
 
 ## Experiment with one or more of write_csv()/read_csv() (and/or TSV friends), saveRDS()/readRDS(), dput()/dget(). Create something new, probably by filtering or grouped-summarization of Singer or Gapminder. I highly recommend you fiddle with the factor levels, i.e. make them non-alphabetical (see previous section). Explore whether this survives the round trip of writing to file then reading back in.
+
 
 ```{r}
 #Wrtie to csv format
