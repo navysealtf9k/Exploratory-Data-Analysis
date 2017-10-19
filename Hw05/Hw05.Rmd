@@ -9,7 +9,7 @@ output: github_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-In this assignment, I attempt the tasks asked of us in ![hw05](http://stat545.com/hw05_factor-figure-boss-repo-hygiene.html).
+In this assignment, I attempt the tasks asked of us in [hw05](http://stat545.com/hw05_factor-figure-boss-repo-hygiene.html).
 
 
 ```{r}
@@ -73,7 +73,7 @@ I first have a look at the order of the levels of the continent variable in my d
 
 For the next part I reorder the levels of "country" in my dataset by the Inter Quartile Range of 'Life Expectancy' in each of them. I then sort the levels from highest to lowest. Hence the first level of 'country' corresponds to the country with the highest IQR of life expectancy and the last, the lowest respectively.
 
-I used the following link to learn more about ![factors](http://r4ds.had.co.nz/factors.html) 
+I used the following link to learn more about [factors](http://r4ds.had.co.nz/factors.html) 
 
 
 ##Explore the effects of arrange(). Does merely arranging the data have any effect on, say, a figure?
@@ -209,7 +209,7 @@ head(gap_filtered)
 ```
 
 As someone who enjoys Cricket and Basketball (what an odd combination) I wanted to see what each of the different countries in our gapminder dataset enjoyed playing during their past time. Hence I sought out to associate each country in Gapminder with its national sport. To do so I obtained data on 
-![national sports of countries](http://www.downloadexcelfiles.com/wo_en/download-excel-file-list-national-sports#.WejsvEwZM_V) from here.
+[national sports of countries](http://www.downloadexcelfiles.com/wo_en/download-excel-file-list-national-sports#.WejsvEwZM_V) from here.
 
 I had to clean this dataset as it had NA's and misplaced column names. Once I got it in a form I liked, I extracted information on the level of the country variable in it. I then used them to choose only those countries from the gapminder dataset. 
 
