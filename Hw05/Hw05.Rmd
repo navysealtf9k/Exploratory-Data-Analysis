@@ -205,9 +205,9 @@ p2 <- national_sport_csv %>%
 
 gap_filtered <- gap_filtered %>% 
   mutate(country = as_factor(levels(p2$country)), sport = as_factor(levels(p2$sport))) %>% 
-  select(country, continent, lifeExp, pop, gdpPercap, sport)
+  select(country, continent, sport, lifeExp, pop, gdpPercap)
 
-head(gap_filtered)
+head(gap_filtered) # Kable does not work on this data frame for some reason
 
 
 ```
