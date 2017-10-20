@@ -179,7 +179,7 @@ In order to retain the levels I use the RDS function. I then verify if the level
 
 
 ```{r}
-national_sport_csv <- read_csv("/Users/abdullah/Desktop/Stat 545/STAT545-hw01-Farouk-Abdullah/STAT545-hw01-Farouk-Abdullah/Hw05/list-national-sports-749j.csv") %>% 
+national_sport_csv <- read_csv("/Users/abdullah/Desktop/Stat 545/STAT545-hw01-Farouk-Abdullah/STAT545-hw01-Farouk-Abdullah/Hw05/Hw05_files/list-national-sports-749j.csv") %>% 
   na.omit(national_sport_csv) %>%  #remove NA's
   rename(country = X2, sport = X3, year = X4) %>%  # Rename columns
   mutate(country = as_factor(country), sport = as_factor(sport)) %>%  # Turn sport into a factor variable
@@ -207,7 +207,7 @@ gap_filtered <- gap_filtered %>%
   mutate(country = as_factor(levels(p2$country)), sport = as_factor(levels(p2$sport))) %>% 
   select(country, continent, sport, lifeExp, pop, gdpPercap)
 
-head(gap_filtered) # Kable does not work on this data frame for some reason
+(gap_filtered) # Kable does not work on this data frame for some reason
 
 
 ```
