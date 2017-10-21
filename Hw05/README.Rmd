@@ -59,8 +59,8 @@ This format was thought of after peer reviewing the following [assignment](https
 ### Pick a handful of countries, each of which you can associate with a stereotypical food (or any other non-controversial thing … sport? hobby? type of music, art or dance? animal? landscape feature?). Create an excerpt of the Gapminder data, filtered to just these countries. Create a new factor – you pick the name! – by mapping the existing country factor levels to the new levels. Examples: Italy –> wine, Germany –> beer, Japan –> sake. (Austria, Germany) –> German, (Mexico, Spain) –> Spanish, (Portugal, Brazil) –> Portuguese. Let your creativity flourish
 - Most time intensive component of the assignment.
 - Had difficulty gathering data from websites as they were not in tsv or csv form.
-- Had difficulty matching levels correctly. Figured out neat work around to overcome this.
-- Could not use kable to print out my table unfortunately.
+- Had to clean up data. Mademodifications to the csv file using my text editor app.
+- Could not use kable to print out my table unfortunately. Did not know how to fix multibyte string error. Apparently the read_csv function does not recognize the characters read in. Not sure how to change/specify encoding. Any help on this would be greatly appreciated.
 
 
 ## NOTE ##
