@@ -25,15 +25,21 @@ I used the sample template to experiment with most of the editing features on R 
 
 I was unsure of how to extend analysis on the gapminder dataset. Hence I chose to answer questions I thought would be interesting. It provided me with a nifty opportunity to embed code chunks and graphs. I had difficulty trying to generate the md file for it. Upon consultation with a friend I realized I had to knit it to generate and not manually type it in at the start of the document.
 
-## Home work 02
+#TABLE OF CONTENTS
+
+#### Home work 02
 
 Please [click here](https://github.com/navysealtf9k/STAT545-hw-Farouk-Abdullah/blob/master/hw02/hw02-Analysis_of_Gapminder_Dataset.md) to see homework 2
 
-## Home work 03
+#### Home work 03
 
 Please [click here](https://github.com/navysealtf9k/STAT545-hw-Farouk-Abdullah/blob/master/Hw03/hwo03.md) to see homework 3
 
 
-## Home work 04 
+#### Home work 04 
 
 Please [click here](https://github.com/navysealtf9k/STAT545-hw-Farouk-Abdullah/blob/master/Hw04/hw04.md) to see homework 4 
+
+#### Homew work 05
+
+Please [click here](https://github.com/navysealtf9k/STAT545-hw-Farouk-Abdullah/blob/master/Hw05/Hw05.md) to see homework 5
