@@ -180,12 +180,9 @@ In order to retain the levels I use the RDS function. I then verify if the level
 
 ```{r}
 national_sport_csv <- read_csv("/Users/abdullah/Desktop/Stat 545/STAT545-hw01-Farouk-Abdullah/STAT545-hw01-Farouk-Abdullah/Hw05/Hw05_files/list-national-sports-749j.csv") %>% 
-  na.omit(national_sport_csv) %>%  #remove NA's
-  rename(country = X2, sport = X3, year = X4) %>%  # Rename columns
-  mutate(country = as_factor(country), sport = as_factor(sport)) %>%  # Turn sport into a factor variable
+  rename(country = Country, sport = Sport) %>%  #Rename columns
+  mutate(country = as_factor(country), sport = as_factor(sport)) %>%  #Turn sport into a factor variable
   select(country, sport)
-
-national_sport_csv <- national_sport_csv[-1,] #remove the first row
 
 kable(head(national_sport_csv))
 
@@ -203,22 +200,21 @@ p2 <- national_sport_csv %>%
   filter(country %in% dn) %>% 
   droplevels()
 
-gap_filtered <- gap_filtered %>% 
-  mutate(country = as_factor(levels(p2$country)), sport = as_factor(levels(p2$sport))) %>% 
+gap_filtered <- inner_join(gap_filtered, p2) %>% 
   select(country, continent, sport, lifeExp, pop, gdpPercap)
 
-(gap_filtered) # Kable does not work on this data frame for some reason
+head(gap_filtered) # Kable does not work on this data frame for some reason
 
 
 ```
 
 As someone who enjoys Cricket and Basketball (what an odd combination) I wanted to see what each of the different countries in our gapminder dataset enjoyed playing during their past time. Hence I sought out to associate each country in Gapminder with its national sport. To do so I obtained data on 
-[national sports of countries](http://www.downloadexcelfiles.com/wo_en/download-excel-file-list-national-sports#.WejsvEwZM_V) from here.
+[the national sport of countries](http://www.downloadexcelfiles.com/wo_en/download-excel-file-list-national-sports#.WejsvEwZM_V) from here.
 
-I had to clean this dataset as it had NA's and misplaced column names. Once I got it in a form I liked, I extracted information on the level of the country variable in it. I then used them to choose only those countries from the gapminder dataset. 
+I had to clean this dataset as it had weird line spacings and multiple sports for only some countries. I did so using my text editor. Once I got it in a form I liked, I read it unsing the read_csv function. I then extracted information on the levels of the variable country. I then used this information to choose only those countries from the gapminder dataset. 
 
-The lines of code under the "piecing it together" heading may seem confusing. They are my rough solution to fix the problem of matching the same variable with different level orders in different datasets. First I define a variable I call p2 and to it I associate the sports of all the countries in both datasets. 
+I notice that my sports dataset had 48 countries whilst the filtered gapminder dataset had only 31 countries. Hence to *"piece it all together"* I select only those countries in my sports dataset that are also in the filtered gapminder dataset as well. To finally associate each country in the gapminder dataset with its national sport, I use the inner join function.
 
-I then modify my gap_filtered dataset to include a new column called sports. Over here I ensure country is displayed in the same manner as it is in the sports dataset. This allows me to match each country with its sport correctly. This is because in the gapminder dataset it's levels are ordered alpahbetically. This is not the case in my sports dataset. 
+Note: I try calling on the kable function to display my table in a nice manner but I can't get it to run for some reason.
 
-This assignment helped me learn how to work with factors, produce visually pleasing graphics, read in data from files in my como=puter and has allowed me to perform some really neat tasks! I really enjoyed this and look forward to learning more in the next part of this course.
+This assignment helped me learn how to work with factors, produce visually pleasing graphics, read in data from files in my computer and has allowed me to perform some really neat tasks! I really enjoyed this and look forward to using these skills in the future!
